@@ -16,6 +16,7 @@ import { patientApi } from '@/features/patients/api/patientApi'
 import { usePatients } from '@/features/patients/hooks/usePatients'
 import { useAuth } from '@/context/AuthContext'
 import { useDentists } from '@/features/users/hooks/useUsers'
+import CareTypeSelect from '@/features/care-types/components/CareTypeSelect'
 import { useCreateAppointment } from '@/features/appointments/hooks/useAppointments'
 import { addMinutesToTime, combineDateAndTime, endFromStart, nearestTimeSlot, SLOT_MINUTES, timeSlots } from '@/features/appointments/utils/agenda'
 import { toDateInput, toTimeInput } from '@/utils/format'
@@ -29,6 +30,7 @@ export default function AppointmentDialog({ open, onClose, defaultPatient, defau
   const listedPatients = patientsPage?.items ?? []
   const [searchResults, setSearchResults] = useState(null)
   const [patient, setPatient] = useState(defaultPatient || null)
+  const [careType, setCareType] = useState(null)
   const start = defaultStart || new Date()
   const end = endFromStart(start)
   const defaultDentistId = isDentist && user?.id ? String(user.id) : dentists[0]?.id ? String(dentists[0].id) : ''
@@ -39,7 +41,6 @@ export default function AppointmentDialog({ open, onClose, defaultPatient, defau
       date: toDateInput(start),
       start_time: nearestTimeSlot(toTimeInput(start)),
       end_time: nearestTimeSlot(toTimeInput(end)),
-      reason: '',
       notes: '',
       status: 'PENDING',
     },
@@ -59,6 +60,7 @@ export default function AppointmentDialog({ open, onClose, defaultPatient, defau
   useEffect(() => {
     if (open) {
       setPatient(defaultPatient || null)
+      setCareType(null)
       setSearchResults(null)
     }
   }, [open, defaultPatient])
@@ -79,7 +81,7 @@ export default function AppointmentDialog({ open, onClose, defaultPatient, defau
       patient_id: patient?.id,
       start_at: combineDateAndTime(values.date, values.start_time).toISOString(),
       end_at: combineDateAndTime(values.date, values.end_time).toISOString(),
-      reason: values.reason,
+      care_type_id: careType?.id,
       notes: values.notes,
       status: values.status,
     })
@@ -146,12 +148,12 @@ export default function AppointmentDialog({ open, onClose, defaultPatient, defau
               ))}
             </TextField>
           </Box>
-          <TextField label="Type de soin" {...register('reason')} placeholder="Détartrage, contrôle..." />
+          <CareTypeSelect value={careType} onChange={setCareType} required />
           <TextField label="Notes" multiline minRows={2} {...register('notes')} />
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose}>Annuler</Button>
-          <Button type="submit" variant="contained" disabled={mutation.isPending || !patient}>
+          <Button type="submit" variant="contained" disabled={mutation.isPending || !patient || !careType}>
             Planifier
           </Button>
         </DialogActions>

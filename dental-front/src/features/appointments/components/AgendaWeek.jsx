@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material'
 import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import { appointmentStatusMeta } from '@/features/appointments/constants/appointmentStatuses'
 import { durationMinutes, isSameDay, slotDate, weekDays } from '@/features/appointments/utils/agenda'
+import { careLabel } from '@/features/care-types/utils/careLabel'
 import { formatTime } from '@/utils/format'
 
 export default function AgendaWeek({ anchor, appointments, onSlotClick, onSelect }) {
@@ -70,7 +71,7 @@ export default function AgendaWeek({ anchor, appointments, onSlotClick, onSelect
                         {appointment.patient?.name}
                       </Typography>
                       <Typography sx={{ fontSize: 12, color: 'text.secondary' }} noWrap>
-                        {appointment.reason || 'Consultation'}
+                        {careLabel(appointment)}
                       </Typography>
                     </Box>
                   )

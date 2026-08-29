@@ -64,7 +64,7 @@ class PatientService
         return $filters;
     }
 
-    private function canAccessPatient(User $user, Patient $patient): bool
+    public function canAccessPatient(User $user, Patient $patient): bool
     {
         if (! $user->hasRole(UserRole::DENTIST->value)) {
             return true;

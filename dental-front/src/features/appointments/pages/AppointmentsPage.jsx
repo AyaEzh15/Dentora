@@ -42,6 +42,8 @@ import {
   rangeForView,
   startOfDay,
 } from '@/features/appointments/utils/agenda'
+import CareTypeSelect from '@/features/care-types/components/CareTypeSelect'
+import { careLabel } from '@/features/care-types/utils/careLabel'
 import { usePatient } from '@/features/patients/hooks/usePatients'
 import { useDentists } from '@/features/users/hooks/useUsers'
 import { formatDate, formatTime } from '@/utils/format'
@@ -62,6 +64,7 @@ export default function AppointmentsPage() {
   const [anchor, setAnchor] = useState(startOfDay(new Date()))
   const [status, setStatus] = useState('all')
   const [dentistId, setDentistId] = useState('all')
+  const [careType, setCareType] = useState(null)
   const [createOpen, setCreateOpen] = useState(Boolean(params.get('patientId')))
   const [slotStart, setSlotStart] = useState(null)
   const [selected, setSelected] = useState(null)
@@ -74,10 +77,12 @@ export default function AppointmentsPage() {
   const calendarQuery = useAppointmentCalendar({
     ...range,
     dentist_id: selectedDentistId,
+    care_type_id: careType?.id,
   })
   const listQuery = useAppointments({
     status: selectedStatus,
     dentist_id: selectedDentistId,
+    care_type_id: careType?.id,
     per_page: 40,
   })
 
@@ -154,6 +159,14 @@ export default function AppointmentsPage() {
             ))}
           </TextField>
         ) : null}
+        <CareTypeSelect
+          size="small"
+          label="Type de soin"
+          value={careType}
+          onChange={setCareType}
+          allowAll
+          sx={{ minWidth: 240 }}
+        />
         <TextField
           select
           size="small"
@@ -211,7 +224,7 @@ export default function AppointmentsPage() {
                       {formatTime(appointment.startAt)} – {formatTime(appointment.endAt)}
                     </TableCell>
                     <TableCell>{appointment.patient?.name}</TableCell>
-                    <TableCell>{appointment.reason || '—'}</TableCell>
+                    <TableCell>{careLabel(appointment)}</TableCell>
                     {!isDentist ? <TableCell>{appointment.dentist?.name}</TableCell> : null}
                     <TableCell onClick={(event) => event.stopPropagation()}>
                       <AppointmentStatusSelect appointment={appointment} />

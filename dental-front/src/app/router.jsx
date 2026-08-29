@@ -10,6 +10,11 @@ import EditPatientPage from '@/features/patients/pages/EditPatientPage'
 import PatientDetailsPage from '@/features/patients/pages/PatientDetailsPage'
 import AppointmentsPage from '@/features/appointments/pages/AppointmentsPage'
 import UsersPage from '@/features/users/pages/UsersPage'
+import CareTypesPage from '@/features/care-types/pages/CareTypesPage'
+import ConsultationsPage from '@/features/consultations/pages/ConsultationsPage'
+import OdontogramPage from '@/features/odontogram/pages/OdontogramPage'
+import TreatmentPlansPage from '@/features/treatment-plans/pages/TreatmentPlansPage'
+import ProceduresPage from '@/features/procedures/pages/ProceduresPage'
 import AuthLayout from '@/layouts/AuthLayout'
 import DashboardLayout from '@/layouts/DashboardLayout'
 import PlaceholderPage from '@/components/common/PlaceholderPage'
@@ -42,6 +47,11 @@ export const router = createBrowserRouter([
           { path: '/patients/:id/edit', element: <EditPatientPage /> },
           { path: '/appointments', element: <AppointmentsPage /> },
           { path: '/users', element: <UsersPage /> },
+          { path: '/care-types', element: <CareTypesPage /> },
+          { path: '/consultations', element: <ConsultationsPage /> },
+          { path: '/odontogram', element: <OdontogramPage /> },
+          { path: '/treatment-plans', element: <TreatmentPlansPage /> },
+          { path: '/procedures', element: <ProceduresPage /> },
           ...PLACEHOLDER_ROUTES.map((route) => ({
             path: `/${route.path}`,
             element: <PlaceholderPage title={route.title} />,

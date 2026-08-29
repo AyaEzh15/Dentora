@@ -3,6 +3,7 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded'
 import EmptyState from '@/components/common/EmptyState'
 import { appointmentStatusMeta } from '@/features/appointments/constants/appointmentStatuses'
 import { durationMinutes, formatDayLabel, hoursRange, isSameDay, slotDate } from '@/features/appointments/utils/agenda'
+import { careLabel } from '@/features/care-types/utils/careLabel'
 import { formatTime, initials } from '@/utils/format'
 
 function DayCard({ appointment, onSelect }) {
@@ -47,7 +48,7 @@ function DayCard({ appointment, onSelect }) {
           {appointment.patient?.name}
         </Typography>
         <Typography variant="body2" color="text.secondary" noWrap>
-          {appointment.reason || 'Consultation'} · {durationMinutes(appointment.startAt, appointment.endAt)} min
+          {careLabel(appointment)} · {durationMinutes(appointment.startAt, appointment.endAt)} min
         </Typography>
       </Box>
       <Box sx={{ textAlign: 'right', flexShrink: 0 }}>

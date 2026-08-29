@@ -7,6 +7,7 @@ use App\Models\Concerns\BelongsToClinic;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Appointment extends Model
 {
@@ -16,6 +17,7 @@ class Appointment extends Model
         'clinic_id',
         'patient_id',
         'dentist_id',
+        'care_type_id',
         'start_at',
         'end_at',
         'status',
@@ -46,8 +48,18 @@ class Appointment extends Model
         return $this->belongsTo(User::class, 'dentist_id');
     }
 
+    public function careType(): BelongsTo
+    {
+        return $this->belongsTo(CareType::class);
+    }
+
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function consultation(): HasOne
+    {
+        return $this->hasOne(Consultation::class);
     }
 }

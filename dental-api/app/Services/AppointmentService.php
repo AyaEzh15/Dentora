@@ -7,6 +7,7 @@ use App\Enums\UserRole;
 use App\Models\Appointment;
 use App\Models\User;
 use App\Repositories\Contracts\AppointmentRepositoryInterface;
+use App\Repositories\Contracts\CareTypeRepositoryInterface;
 use App\Repositories\Contracts\PatientRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -18,8 +19,10 @@ class AppointmentService
 {
     public function __construct(
         private AppointmentRepositoryInterface $appointments,
+        private CareTypeRepositoryInterface $careTypes,
         private PatientRepositoryInterface $patients,
-        private UserRepositoryInterface $users
+        private UserRepositoryInterface $users,
+        private ConsultationService $consultations
     ) {}
 
     public function paginate(User $user, array $filters = []): LengthAwarePaginator
@@ -54,13 +57,17 @@ class AppointmentService
 
         $this->assertPatientInClinic($user, (int) $data['patient_id']);
         $this->assertDentistInClinic($user, (int) $data['dentist_id']);
+        $this->applyCareType($data);
         $this->ensureDentistIsAvailable((int) $data['dentist_id'], $data['start_at'], $data['end_at']);
 
         $data['clinic_id'] = $user->clinic_id;
         $data['created_by'] = $user->id;
         $data['status'] = $data['status'] ?? AppointmentStatus::PENDING->value;
 
-        return $this->appointments->create($data);
+        $appointment = $this->appointments->create($data);
+        $this->syncConsultationIfCompleted($user, $appointment);
+
+        return $appointment;
     }
 
     public function update(User $user, int $id, array $data): Appointment
@@ -69,6 +76,10 @@ class AppointmentService
 
         if (isset($data['patient_id'])) {
             $this->assertPatientInClinic($user, (int) $data['patient_id']);
+        }
+
+        if (isset($data['care_type_id'])) {
+            $this->applyCareType($data);
         }
 
         if ($user->hasRole(UserRole::DENTIST->value)) {
@@ -90,7 +101,10 @@ class AppointmentService
             $this->ensureDentistIsAvailable((int) $dentistId, $startAt, $endAt, $appointment->id);
         }
 
-        return $this->appointments->update($appointment, $data);
+        $updated = $this->appointments->update($appointment, $data);
+        $this->syncConsultationIfCompleted($user, $updated);
+
+        return $updated;
     }
 
     public function cancel(User $user, int $id, ?string $reason = null): Appointment
@@ -151,6 +165,28 @@ class AppointmentService
                 ]);
             }
         }
+    }
+
+    private function applyCareType(array &$data): void
+    {
+        $careType = $this->careTypes->findActive((int) $data['care_type_id']);
+
+        if (! $careType) {
+            throw ValidationException::withMessages([
+                'care_type_id' => ['Ce type de soin est introuvable.'],
+            ]);
+        }
+
+        $data['reason'] = $careType->name;
+    }
+
+    private function syncConsultationIfCompleted(User $user, Appointment $appointment): void
+    {
+        if ($appointment->status !== AppointmentStatus::COMPLETED) {
+            return;
+        }
+
+        $this->consultations->createFromAppointment($user, $appointment);
     }
 
     private function assertDentistInClinic(User $user, int $dentistId): void

@@ -1,5 +1,6 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Typography } from '@mui/material'
 import AppointmentStatusSelect from '@/features/appointments/components/AppointmentStatusSelect'
+import { careLabel } from '@/features/care-types/utils/careLabel'
 import { formatDateTime } from '@/utils/format'
 
 export default function AppointmentDetailsDialog({ appointment, onClose }) {
@@ -15,7 +16,7 @@ export default function AppointmentDetailsDialog({ appointment, onClose }) {
           {formatDateTime(appointment.startAt)} → {formatDateTime(appointment.endAt)}
         </Typography>
         <Typography variant="body2">
-          {appointment.reason || 'Consultation'} · {appointment.dentist?.name}
+          {careLabel(appointment)} · {appointment.dentist?.name}
         </Typography>
         {appointment.notes ? (
           <Typography variant="body2" color="text.secondary">

@@ -21,7 +21,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
     {
         return Appointment::query()
             ->forClinic($clinicId)
-            ->with(['patient', 'dentist'])
+            ->with(['patient', 'dentist', 'careType'])
             ->find($id);
     }
 
@@ -29,14 +29,14 @@ class AppointmentRepository implements AppointmentRepositoryInterface
     {
         $appointment = Appointment::query()->create($data);
 
-        return $appointment->load(['patient', 'dentist']);
+        return $appointment->load(['patient', 'dentist', 'careType']);
     }
 
     public function update(Appointment $appointment, array $data): Appointment
     {
         $appointment->update($data);
 
-        return $appointment->fresh(['patient', 'dentist']);
+        return $appointment->fresh(['patient', 'dentist', 'careType']);
     }
 
     public function overlapping(int $dentistId, string $startAt, string $endAt, ?int $ignoreId = null): bool
@@ -57,12 +57,16 @@ class AppointmentRepository implements AppointmentRepositoryInterface
     {
         $query = Appointment::query()
             ->forClinic($clinicId)
-            ->with(['patient', 'dentist'])
+            ->with(['patient', 'dentist', 'careType'])
             ->where('start_at', '<', $to)
             ->where('end_at', '>', $from);
 
         if (! empty($filters['dentist_id'])) {
             $query->where('dentist_id', $filters['dentist_id']);
+        }
+
+        if (! empty($filters['care_type_id'])) {
+            $query->where('care_type_id', $filters['care_type_id']);
         }
 
         return $query->orderBy('start_at')->get();
@@ -72,7 +76,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
     {
         $query = Appointment::query()
             ->forClinic($clinicId)
-            ->with(['patient', 'dentist'])
+            ->with(['patient', 'dentist', 'careType'])
             ->whereDate('start_at', now()->toDateString());
 
         if (! empty($filters['dentist_id'])) {
@@ -112,7 +116,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
     {
         $query = Appointment::query()
             ->forClinic($clinicId)
-            ->with(['patient', 'dentist']);
+            ->with(['patient', 'dentist', 'careType']);
 
         if (! empty($filters['status'])) {
             $query->where('status', $filters['status']);
@@ -124,6 +128,10 @@ class AppointmentRepository implements AppointmentRepositoryInterface
 
         if (! empty($filters['patient_id'])) {
             $query->where('patient_id', $filters['patient_id']);
+        }
+
+        if (! empty($filters['care_type_id'])) {
+            $query->where('care_type_id', $filters['care_type_id']);
         }
 
         if (! empty($filters['from'])) {
@@ -138,6 +146,7 @@ class AppointmentRepository implements AppointmentRepositoryInterface
             $search = $filters['search'];
             $query->where(function ($q) use ($search) {
                 $q->where('reason', 'like', "%{$search}%")
+                    ->orWhereHas('careType', fn ($careType) => $careType->where('name', 'like', "%{$search}%"))
                     ->orWhereHas('patient', function ($patient) use ($search) {
                         $patient->where('first_name', 'like', "%{$search}%")
                             ->orWhere('last_name', 'like', "%{$search}%")

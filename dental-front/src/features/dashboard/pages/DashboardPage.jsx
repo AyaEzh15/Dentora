@@ -154,7 +154,7 @@ export default function DashboardPage() {
                     </Avatar>
                     {appointment.patient?.name}
                   </TableCell>
-                  <TableCell>{appointment.reason || '—'}</TableCell>
+                  <TableCell>{appointment.careType?.name || appointment.reason || '—'}</TableCell>
                   <TableCell>
                     <AppointmentStatusSelect appointment={appointment} />
                   </TableCell>

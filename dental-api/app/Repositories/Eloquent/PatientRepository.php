@@ -13,7 +13,7 @@ class PatientRepository implements PatientRepositoryInterface
     {
         $query = Patient::query()
             ->forClinic($clinicId)
-            ->with(['appointments' => fn ($q) => $q->orderByDesc('start_at')]);
+            ->with(['appointments' => fn ($q) => $q->with(['dentist', 'careType'])->orderByDesc('start_at')]);
 
         if (! empty($filters['search'])) {
             $search = $filters['search'];
@@ -43,7 +43,7 @@ class PatientRepository implements PatientRepositoryInterface
     {
         return Patient::query()
             ->forClinic($clinicId)
-            ->with(['appointments' => fn ($q) => $q->with('dentist')->orderByDesc('start_at')])
+            ->with(['appointments' => fn ($q) => $q->with(['dentist', 'careType'])->orderByDesc('start_at')])
             ->find($id);
     }
 
@@ -56,7 +56,7 @@ class PatientRepository implements PatientRepositoryInterface
     {
         $patient->update($data);
 
-        return $patient->fresh(['appointments.dentist']);
+        return $patient->fresh(['appointments.dentist', 'appointments.careType']);
     }
 
     public function nextFileNumber(int $clinicId): string

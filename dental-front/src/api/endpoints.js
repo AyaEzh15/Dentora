@@ -16,9 +16,21 @@ export const endpoints = {
     detail: (id) => `/appointments/${id}`,
     cancel: (id) => `/appointments/${id}/cancel`,
   },
+  careTypes: {
+    list: '/care-types',
+    detail: (id) => `/care-types/${id}`,
+  },
   users: {
     list: '/users',
     dentists: '/users/dentists',
     detail: (id) => `/users/${id}`,
+  },
+  clinical: {
+    medicalRecord: (patientId) => `/patients/${patientId}/medical-record`,
+    odontogram: (patientId) => `/patients/${patientId}/odontogram`,
+    consultations: '/consultations',
+    consultation: (id) => `/consultations/${id}`,
+    treatmentPlans: '/treatment-plans',
+    treatmentPlan: (id) => `/treatment-plans/${id}`,
   },
 }

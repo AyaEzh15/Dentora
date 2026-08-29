@@ -6,6 +6,7 @@ import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined'
 import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined'
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined'
 import LocalPharmacyOutlinedIcon from '@mui/icons-material/LocalPharmacyOutlined'
+import HealthAndSafetyOutlinedIcon from '@mui/icons-material/HealthAndSafetyOutlined'
 import MedicalServicesOutlinedIcon from '@mui/icons-material/MedicalServicesOutlined'
 import PaymentsOutlinedIcon from '@mui/icons-material/PaymentsOutlined'
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined'
@@ -69,6 +70,7 @@ export const NAV_SECTIONS = [
     title: 'Administration',
     items: [
       { label: 'Personnel', path: '/users', icon: GroupOutlinedIcon, permission: 'users.view' },
+      { label: 'Types de soins', path: '/care-types', icon: HealthAndSafetyOutlinedIcon, permission: 'care-types.manage' },
       { label: 'Cabinet', path: '/clinics', icon: BusinessOutlinedIcon, permission: 'settings.manage' },
       { label: 'Paramètres', path: '/settings', icon: SettingsOutlinedIcon, permission: 'settings.manage' },
     ],
@@ -76,10 +78,6 @@ export const NAV_SECTIONS = [
 ]
 
 export const PLACEHOLDER_ROUTES = [
-  { path: 'consultations', title: 'Consultations' },
-  { path: 'odontogram', title: 'Odontogramme' },
-  { path: 'treatment-plans', title: 'Plans de traitement' },
-  { path: 'procedures', title: 'Actes' },
   { path: 'prescriptions', title: 'Ordonnances' },
   { path: 'billing', title: 'Factures' },
   { path: 'payments', title: 'Paiements' },

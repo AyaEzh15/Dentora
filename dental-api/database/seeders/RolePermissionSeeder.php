@@ -61,6 +61,8 @@ class RolePermissionSeeder extends Seeder
             'users.view',
             'users.manage',
 
+            'care-types.manage',
+
             'settings.manage',
         ];
 
