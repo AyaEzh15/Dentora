@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+
+<html lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sérénité Dentaire - Connexion</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#444749",
+                    "secondary-container": "#76f4e0",
+                    "inverse-surface": "#233144",
+                    "on-primary-fixed": "#001d34",
+                    "primary-fixed": "#cfe5ff",
+                    "surface": "#f8f9ff",
+                    "background": "#f8f9ff",
+                    "surface-bright": "#f8f9ff",
+                    "inverse-primary": "#9acbff",
+                    "on-surface": "#0d1c2e",
+                    "primary-fixed-dim": "#9acbff",
+                    "surface-variant": "#d5e3fc",
+                    "primary": "#005e97",
+                    "on-secondary-container": "#006f63",
+                    "surface-container": "#e6eeff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#00201c",
+                    "on-surface-variant": "#404751",
+                    "tertiary": "#575b5c",
+                    "secondary-fixed-dim": "#59dbc7",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#eaf1ff",
+                    "secondary": "#006b5f",
+                    "on-background": "#0d1c2e",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#dce9ff",
+                    "on-primary-container": "#f7f9ff",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#e0e3e5",
+                    "surface-tint": "#00629e",
+                    "primary-container": "#0077be",
+                    "outline": "#707882",
+                    "on-tertiary-fixed": "#191c1e",
+                    "secondary-fixed": "#79f7e3",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#f8fafc",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary-container": "#707375",
+                    "surface-container-highest": "#d5e3fc",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#ccdbf3",
+                    "on-secondary-fixed-variant": "#005047",
+                    "on-primary-fixed-variant": "#004a79",
+                    "outline-variant": "#c0c7d2",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "margin": "24px",
+                    "lg": "24px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "body-sm": [
+                            "Inter"
+                    ],
+                    "headline-lg": [
+                            "Inter"
+                    ],
+                    "label-md": [
+                            "Inter"
+                    ],
+                    "headline-lg-mobile": [
+                            "Inter"
+                    ],
+                    "headline-md": [
+                            "Inter"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "headline-xl": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "body-sm": [
+                            "13px",
+                            {
+                                    "lineHeight": "18px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-md": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-xl": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md h-screen w-full overflow-hidden flex">
+<!-- Left Side: Conceptual Medical Illustration Background -->
+<div class="hidden lg:flex lg:w-5/12 xl:w-1/2 relative bg-surface-container flex-col justify-end p-xl">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A brightly lit, modern dental clinic room in soft focus, emphasizing cleanliness and professional medical care. The scene features sleek white medical equipment with subtle blue accents, bathed in natural sunlight filtering through a large frosted window. The mood is calm, sterile, and highly professional, using a high-key lighting setup with a palette of crisp whites, soft greys, and touches of medical primary blue (#005e97) reflecting a sophisticated corporate identity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAdXa-p1_iR7SfX9zvS_U7N_uxyv6xG5gCSBCYL4A2MLtKiEhaDITQwASjPmjPmathXKQLNfKruUkixZD_4708C797475KCmXEzoeq2k4Ts9s_vn50UknYOIxGNyxcIIuCxysNhc9kMEEh8JAtMOhmt-hNZDcYf-L7oKRZucuYsA9_SLBHPS8HX1bzhokTBjo-PyY1XcqVbE0hF28N4Yc67Q5EIQRD3qzqDROeeu0rjTqKM1Qahp6sGHw')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary-fixed/90 via-primary-fixed/30 to-transparent mix-blend-multiply pointer-events-none"></div>
+<div class="relative z-10 text-on-primary-fixed mb-xl max-w-lg">
+<h2 class="font-headline-lg text-headline-lg mb-sm">L'excellence au service de votre pratique.</h2>
+<p class="font-body-lg text-body-lg opacity-90">Gérez vos dossiers patients, vos rendez-vous et votre facturation avec une précision et une simplicité inégalées.</p>
+</div>
+</div>
+<!-- Right Side: Login Form -->
+<div class="w-full lg:w-7/12 xl:w-1/2 flex items-center justify-center p-md sm:p-lg xl:p-xl bg-surface overflow-y-auto">
+<!-- Login Card -->
+<div class="w-full max-w-md bg-surface-container-lowest rounded-xl shadow-[0px_10px_25px_rgba(0,0,0,0.05)] border border-outline-variant/30 p-xl relative overflow-hidden">
+<!-- Subtle top accent line -->
+<div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+<!-- Header -->
+<div class="text-center mb-xl mt-sm">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-fixed/30 mb-md">
+<span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 1;">dentistry</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-xs tracking-tight">Sérénité Dentaire</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Accédez à votre espace de gestion</p>
+</div>
+<!-- Form -->
+<form class="space-y-lg">
+<!-- Email Field -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Identifiant ou E-mail</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline text-[20px]">person</span>
+<input class="w-full pl-xl pr-md py-[10px] bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline/70" placeholder="docteur@clinique.fr" required="" type="text"/>
+</div>
+</div>
+<!-- Password Field -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Mot de passe</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline text-[20px]">lock</span>
+<input class="w-full pl-xl pr-md py-[10px] bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all placeholder:text-outline/70" placeholder="••••••••" required="" type="password"/>
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors focus:outline-none" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Options Row -->
+<div class="flex items-center justify-between pt-xs">
+<label class="flex items-center space-x-sm cursor-pointer group">
+<div class="relative flex items-center">
+<input class="peer h-4 w-4 rounded-[4px] border-outline text-primary focus:ring-primary/20 focus:ring-2 bg-surface-container-lowest transition-all cursor-pointer" type="checkbox"/>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant group-hover:text-on-surface transition-colors">Se souvenir de moi</span>
+</label>
+<a class="font-body-sm text-body-sm text-primary hover:text-surface-tint hover:underline font-semibold transition-colors" href="#">Mot de passe oublié ?</a>
+</div>
+<!-- Submit Button -->
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-lg hover:bg-surface-tint active:scale-[0.98] transition-all flex items-center justify-center gap-sm mt-lg shadow-sm" type="submit">
+                    Se connecter
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</form>
+<!-- Footer Links -->
+<div class="mt-xl pt-lg border-t border-outline-variant/30 text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                    Besoin d'assistance technique ? <br/>
+<a class="text-primary hover:underline font-medium inline-flex items-center gap-xs mt-xs" href="#">
+<span class="material-symbols-outlined text-[16px]">support_agent</span>
+                        Contacter le support
+                    </a>
+</p>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sérénité Dentaire - Liste des rendez-vous</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c0c7d2",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "on-primary-fixed-variant": "#004a79",
+                    "on-primary-fixed": "#001d34",
+                    "on-surface-variant": "#404751",
+                    "on-primary-container": "#f7f9ff",
+                    "background": "#f8f9ff",
+                    "inverse-primary": "#9acbff",
+                    "surface": "#f8f9ff",
+                    "primary-fixed": "#cfe5ff",
+                    "on-secondary-fixed": "#00201c",
+                    "inverse-surface": "#233144",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#76f4e0",
+                    "surface-tint": "#00629e",
+                    "secondary": "#006b5f",
+                    "primary": "#005e97",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "on-surface": "#0d1c2e",
+                    "on-tertiary-container": "#f8fafc",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#005047",
+                    "tertiary": "#575b5c",
+                    "on-tertiary-fixed": "#191c1e",
+                    "outline": "#707882",
+                    "surface-dim": "#ccdbf3",
+                    "surface-container": "#e6eeff",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#dce9ff",
+                    "primary-fixed-dim": "#9acbff",
+                    "tertiary-fixed": "#e0e3e5",
+                    "tertiary-container": "#707375",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8f9ff",
+                    "secondary-fixed-dim": "#59dbc7",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#006f63",
+                    "primary-container": "#0077be",
+                    "surface-variant": "#d5e3fc",
+                    "surface-container-highest": "#d5e3fc",
+                    "surface-container-low": "#eff4ff",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#0d1c2e",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#79f7e3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "margin": "24px",
+                    "lg": "24px",
+                    "base": "4px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md flex h-screen overflow-hidden">
+<aside class="h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant bg-surface flex flex-col py-lg z-40 hidden md:flex">
+<div class="px-md mb-xl flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">dentistry</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">DentalPro</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Management Suite</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-xs px-sm">
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Tableau de bord</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Patients</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-primary font-bold bg-surface-container-high border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">event</span>
+<span class="font-label-md text-label-md">Rendez-vous</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Calendrier</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-label-md text-label-md">Consultations</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="font-label-md text-label-md">Dossiers dentaires</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-md text-label-md">Plans de traitement</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Ordonnances</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Facturation &amp; Paiements</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Dépenses</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Stock</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Statistiques &amp; Rapports</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Personnel</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant mt-auto" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Paramètres</span>
+</a>
+</nav>
+</aside>
+<div class="flex-1 md:ml-64 flex flex-col w-full h-full">
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] z-50 border-b border-outline-variant bg-surface flex justify-between items-center px-lg h-16">
+<div class="flex items-center w-full max-w-md bg-surface-container-highest rounded-full px-md py-sm">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant p-0" placeholder="Rechercher patient, acte..." type="text"/>
+</div>
+<div class="flex items-center gap-md">
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-highest transition-transform active:scale-95 flex items-center justify-center text-on-surface-variant relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-highest transition-transform active:scale-95 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-sm cursor-pointer hover:opacity-80 transition-opacity">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a smiling male dentist wearing a white clinical coat, brightly lit against a neutral grey background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrNOlNiyjKBOoHsSqO5u-qtk9MMktm_zkQ9mgqbHDwFTe1ev2Cs5o0333oIM6eBCVC79FWTA6Yz15AB3SJ3TOqm2i6ZNVy2z9wwvap2Bjl28tG0dZf1PqanL9QXHGIK4h9hpmk93Q8W2doKLZjMvBYDXJG3xQP22E9UoE9_r-nbTb_sKPAFlFMQH64XefZ7_tICtVR_JgvCq3YoNYJxYgik77Ja7ZjdaP62HF8vbRMs5v2A8hbZvfs0A"/>
+</div>
+</div>
+</header>
+<main class="pt-[80px] p-lg flex-1 overflow-y-auto">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Gestion des Rendez-vous</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Aperçu et gestion de la journée clinique.</p>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md px-lg py-sm rounded-lg flex items-center gap-sm hover:bg-primary/90 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Nouveau Rendez-vous
+                </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md mb-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0_4px_12px_rgba(0,0,0,0.02)] flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">today</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Aujourd'hui</p>
+<p class="font-headline-md text-headline-md text-on-surface">24</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0_4px_12px_rgba(0,0,0,0.02)] flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">hourglass_empty</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">En attente</p>
+<p class="font-headline-md text-headline-md text-on-surface">3</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0_4px_12px_rgba(0,0,0,0.02)] flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Terminés</p>
+<p class="font-headline-md text-headline-md text-on-surface">12</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0_4px_12px_rgba(0,0,0,0.02)] flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined">cancel</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant">Annulés</p>
+<p class="font-headline-md text-headline-md text-on-surface">1</p>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05)] overflow-hidden flex flex-col h-[calc(100vh-280px)] min-h-[400px]">
+<div class="p-md border-b border-outline-variant flex flex-col md:flex-row justify-between items-start md:items-center gap-md bg-surface">
+<div class="flex bg-surface-container-high rounded-lg p-xs">
+<button class="px-md py-sm rounded-md bg-surface-container-lowest text-primary font-label-md text-label-md shadow-sm">Aujourd'hui</button>
+<button class="px-md py-sm rounded-md text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors">À venir</button>
+<button class="px-md py-sm rounded-md text-on-surface-variant font-label-md text-label-md hover:text-on-surface transition-colors">Passés</button>
+</div>
+<div class="flex items-center gap-sm w-full md:w-auto">
+<div class="relative w-full md:w-48">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">person</span>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-xl pr-sm py-sm font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary appearance-none">
+<option value="">Tous les praticiens</option>
+<option value="dr_smith">Dr. Smith</option>
+<option value="dr_martin">Dr. Martin</option>
+</select>
+</div>
+<div class="relative w-full md:w-48">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">filter_list</span>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-xl pr-sm py-sm font-body-sm text-body-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary appearance-none">
+<option value="">Tous les statuts</option>
+<option value="confirme">Confirmé</option>
+<option value="attente">En attente</option>
+</select>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-auto">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-low border-b border-outline-variant z-10">
+<tr>
+<th class="py-sm px-md font-label-md text-label-md text-on-surface-variant font-semibold">Heure</th>
+<th class="py-sm px-md font-label-md text-label-md text-on-surface-variant font-semibold">Patient</th>
+<th class="py-sm px-md font-label-md text-label-md text-on-surface-variant font-semibold">Praticien</th>
+<th class="py-sm px-md font-label-md text-label-md text-on-surface-variant font-semibold">Motif</th>
+<th class="py-sm px-md font-label-md text-label-md text-on-surface-variant font-semibold">Durée</th>
+<th class="py-sm px-md font-label-md text-label-md text-on-surface-variant font-semibold">Statut</th>
+<th class="py-sm px-md font-label-md text-label-md text-on-surface-variant font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-md px-md font-body-md text-body-md text-on-surface whitespace-nowrap">08:30</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-label-md text-label-md text-on-surface-variant">JD</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Jean Dupont</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">#PT-4829</p>
+</div>
+</div>
+</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface-variant">Dr. Smith</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface">Détartrage &amp; Contrôle</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface-variant">30 min</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-label-md bg-secondary-fixed text-on-secondary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-on-secondary-fixed mr-1.5"></span>
+                                        Terminé
+                                    </span>
+</td>
+<td class="py-md px-md text-right">
+<div class="flex justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-xs text-on-surface-variant hover:text-primary transition-colors rounded hover:bg-surface-variant" title="Voir dossier">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-md px-md font-body-md text-body-md text-on-surface whitespace-nowrap font-bold">09:00</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-label-md text-label-md text-on-surface-variant">MC</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Marie Curie</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">#PT-5102</p>
+</div>
+</div>
+</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface-variant">Dr. Smith</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface">Extraction Dent de Sagesse</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface-variant">60 min</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-label-md bg-surface-tint text-on-primary">
+<span class="material-symbols-outlined text-[14px] mr-1">medical_services</span>
+                                        En consultation
+                                    </span>
+</td>
+<td class="py-md px-md text-right">
+<button class="px-sm py-xs bg-surface-variant text-on-surface border border-outline-variant rounded font-label-md text-xs hover:bg-surface-container-highest transition-colors">
+                                        Ouvrir dossier
+                                    </button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group bg-primary-fixed/20">
+<td class="py-md px-md font-body-md text-body-md text-on-surface whitespace-nowrap">10:00</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Close up professional portrait of a senior man smiling warmly, softly lit." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQzyKF_PGLnv1UdfQ2fjczAGvKxtcIQHxfWwYwCMUMwBD4aS9z2bscfaFyI7aL0ptC3u8lsRvJpMGA4fLdIHGjYg2F8kZIOymkuiHphylewjcVm9-AFMVg84u5ZME6tUxnQZIfYvNrnK-7lyGiDb2snS6N59mI1c8LZpLaY1BYTwRHTZjTlIkRKbA_-rYXS6Iq5qa7y6tluenL6_u0KBl74_Q9tckAwik8642KuNq6b1dEHUi3yaaHZw"/>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Alain Prost</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">#PT-1093</p>
+</div>
+</div>
+</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface-variant">Dr. Martin</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface">Pose de Couronne</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface-variant">45 min</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-label-md bg-tertiary-fixed text-on-tertiary-fixed">
+<span class="w-1.5 h-1.5 rounded-full bg-on-tertiary-fixed mr-1.5 animate-pulse"></span>
+                                        En attente (Salle 2)
+                                    </span>
+</td>
+<td class="py-md px-md text-right">
+<div class="flex justify-end gap-xs">
+<button class="px-sm py-xs bg-primary text-on-primary rounded font-label-md text-xs hover:bg-primary/90 flex items-center gap-1 shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[14px]">play_arrow</span>
+                                            Démarrer
+                                        </button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-md px-md font-body-md text-body-md text-on-surface whitespace-nowrap">10:45</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-label-md text-label-md text-on-surface-variant">SL</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Sophie Laurent</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">#PT-8821</p>
+</div>
+</div>
+</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface-variant">Dr. Martin</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface">Traitement Carie</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface-variant">30 min</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-label-md bg-primary-fixed text-on-primary-fixed">
+                                        Confirmé
+                                    </span>
+</td>
+<td class="py-md px-md text-right">
+<div class="flex justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-xs text-on-surface-variant hover:text-on-surface transition-colors rounded hover:bg-surface-variant" title="Modifier">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:text-on-surface transition-colors rounded hover:bg-surface-variant" title="Reporter">
+<span class="material-symbols-outlined text-[20px]">calendar_clock</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group opacity-70">
+<td class="py-md px-md font-body-md text-body-md text-on-surface whitespace-nowrap line-through">11:15</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-label-md text-label-md text-on-surface-variant">PB</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Paul Bernard</p>
+</div>
+</div>
+</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface-variant">Dr. Smith</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface">Consultation Initiale</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface-variant">30 min</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-label-md bg-error-container text-on-error-container">
+                                        Annulé
+                                    </span>
+</td>
+<td class="py-md px-md text-right">
+<div class="flex justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-xs text-on-surface-variant hover:text-on-surface transition-colors rounded hover:bg-surface-variant" title="Historique">
+<span class="material-symbols-outlined text-[20px]">history</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-md px-md font-body-md text-body-md text-on-surface whitespace-nowrap">11:45</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-label-md text-label-md text-on-surface-variant">CD</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Claire Dubois</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">#PT-2290</p>
+</div>
+</div>
+</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface-variant">Dr. Smith</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface">Blanchiment</td>
+<td class="py-md px-md font-body-md text-body-md text-on-surface-variant">45 min</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-label-md border border-outline text-on-surface-variant">
+                                        Planifié
+                                    </span>
+</td>
+<td class="py-md px-md text-right">
+<div class="flex justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-xs text-on-surface-variant hover:text-on-surface transition-colors rounded hover:bg-surface-variant" title="Modifier">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="border-t border-outline-variant bg-surface px-md py-sm flex justify-between items-center text-body-sm text-on-surface-variant">
+<p>Affichage de 1 à 6 sur 24 rendez-vous</p>
+<div class="flex gap-sm">
+<button class="p-xs rounded hover:bg-surface-variant disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="p-xs rounded hover:bg-surface-variant">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

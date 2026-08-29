@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DentalPro Clinic - Tableau de bord</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#444749",
+                    "secondary-container": "#76f4e0",
+                    "inverse-surface": "#233144",
+                    "on-primary-fixed": "#001d34",
+                    "primary-fixed": "#cfe5ff",
+                    "surface": "#f8f9ff",
+                    "background": "#f8f9ff",
+                    "surface-bright": "#f8f9ff",
+                    "inverse-primary": "#9acbff",
+                    "on-surface": "#0d1c2e",
+                    "primary-fixed-dim": "#9acbff",
+                    "surface-variant": "#d5e3fc",
+                    "primary": "#005e97",
+                    "on-secondary-container": "#006f63",
+                    "surface-container": "#e6eeff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#00201c",
+                    "on-surface-variant": "#404751",
+                    "tertiary": "#575b5c",
+                    "secondary-fixed-dim": "#59dbc7",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "inverse-on-surface": "#eaf1ff",
+                    "secondary": "#006b5f",
+                    "on-background": "#0d1c2e",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#dce9ff",
+                    "on-primary-container": "#f7f9ff",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#e0e3e5",
+                    "surface-tint": "#00629e",
+                    "primary-container": "#0077be",
+                    "outline": "#707882",
+                    "on-tertiary-fixed": "#191c1e",
+                    "secondary-fixed": "#79f7e3",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#f8fafc",
+                    "surface-container-low": "#eff4ff",
+                    "tertiary-container": "#707375",
+                    "surface-container-highest": "#d5e3fc",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#ccdbf3",
+                    "on-secondary-fixed-variant": "#005047",
+                    "on-primary-fixed-variant": "#004a79",
+                    "outline-variant": "#c0c7d2",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "margin": "24px",
+                    "lg": "24px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "md": "16px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter", "sans-serif"],
+                    "headline-lg": ["Inter", "sans-serif"],
+                    "label-md": ["Inter", "sans-serif"],
+                    "headline-lg-mobile": ["Inter", "sans-serif"],
+                    "headline-md": ["Inter", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"],
+                    "headline-xl": ["Inter", "sans-serif"],
+                    "body-lg": ["Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar (from JSON) -->
+<aside class="bg-surface dark:bg-surface font-body-md text-body-md h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant dark:border-outline z-40">
+<div class="flex flex-col h-full py-lg">
+<!-- Header -->
+<div class="px-md mb-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="medical_services">medical_services</span>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">DentalPro Clinic</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Management Suite</p>
+</div>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 flex flex-col gap-xs px-sm">
+<!-- Active Item: Tableau de bord -->
+<a class="flex items-center gap-md px-md py-sm text-primary dark:text-inverse-primary font-bold border-r-4 border-primary hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Tableau de bord</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Patients</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span>Rendez-vous</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span>Calendrier</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+<span>Consultations</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span>Dossiers dentaires</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span>Plans de traitement</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Ordonnances</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span>Facturation &amp; Paiements</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span>Dépenses</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span>Stock</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Documents</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Statistiques &amp; Rapports</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span>Personnel</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all rounded-r-lg mt-auto" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Paramètres</span>
+</a>
+</nav>
+</div>
+</aside>
+<!-- Main Content Wrapper (offset for fixed sidebar and topnav) -->
+<div class="flex-1 ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar (from JSON) -->
+<header class="bg-surface dark:bg-surface font-body-md text-body-md fixed top-0 right-0 w-[calc(100%-16rem)] z-50 border-b border-outline-variant dark:border-outline">
+<div class="flex justify-between items-center px-lg h-16">
+<!-- Search -->
+<div class="flex-1 flex items-center">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-sm text-body-sm text-on-surface placeholder:text-on-surface-variant transition-all" placeholder="Rechercher un patient, un rdv..." type="text"/>
+</div>
+</div>
+<!-- Actions & Profile -->
+<div class="flex items-center gap-sm">
+<button aria-label="Notifications" class="p-2 text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="Aide" class="p-2 text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-2"></div>
+<button class="flex items-center gap-2 hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-full p-1 pr-3 active:scale-95 transition-transform">
+<img alt="Dr. Smith Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="Professional headshot of a mature male dentist wearing light blue scrubs, smiling warmly in a modern clinical setting with soft natural lighting and shallow depth of field. High-end modern healthcare aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyfwQxhJQvpMmEWuR9OBbHcu8cNnBVISBEZcFghbqdeOUKUcGt9vG4BAVXlr98B4SAwdqWCnD1sKc0HN7jvp1C78kGeCRvGYB2xWWlasPsOncqS1jL3Kl2D7JzusVIgc3nqoptdYgcpMGoNaeQA9c46CkxQuFUWfrddpzh2B7wVq62_SR1n-g_THtGtFip2_lvhRBNJJ-dPv90C7DzJISxOUNxIGcCD2UGkP5TPvYBC5j3ci256-UzAg"/>
+<span class="font-label-md text-label-md text-on-surface">Dr. Smith</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 pt-16 p-lg overflow-y-auto bg-background">
+<!-- Page Header & Quick Actions -->
+<div class="flex justify-between items-center mb-lg">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-on-background">Tableau de bord</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Vue d'ensemble de la clinique - Aujourd'hui</p>
+</div>
+<div class="flex gap-sm">
+<button class="flex items-center gap-2 px-4 py-2 bg-secondary-container text-on-secondary-container font-label-md text-label-md rounded-lg hover:bg-secondary-fixed-dim transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="person_add">person_add</span>
+                        Ajouter un patient
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-highest text-on-surface font-label-md text-label-md border border-outline-variant rounded-lg hover:bg-surface-variant transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="event_available">event_available</span>
+                        Nouveau rdv
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary-container transition-colors shadow-[0px_4px_12px_rgba(0,0,0,0.1)]">
+<span class="material-symbols-outlined text-[18px]" data-icon="receipt">receipt</span>
+                        Nouvelle facture
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- KPI Section (Top row) -->
+<div class="col-span-12 grid grid-cols-4 gap-gutter mb-sm">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0px_4px_12px_rgba(0,0,0,0.05)] flex items-center justify-between">
+<div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Rendez-vous aujourd'hui</p>
+<p class="font-headline-lg text-headline-lg text-on-surface mt-1">8</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0px_4px_12px_rgba(0,0,0,0.05)] flex items-center justify-between">
+<div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Patients en attente</p>
+<p class="font-headline-lg text-headline-lg text-on-surface mt-1">3</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-on-error-container">
+<span class="material-symbols-outlined" data-icon="hourglass_empty">hourglass_empty</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0px_4px_12px_rgba(0,0,0,0.05)] flex items-center justify-between">
+<div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">CA du jour</p>
+<p class="font-headline-lg text-headline-lg text-on-surface mt-1">1,450€</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0px_4px_12px_rgba(0,0,0,0.05)] flex items-center justify-between">
+<div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Factures impayées</p>
+<p class="font-headline-lg text-headline-lg text-on-surface mt-1">3,200€</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+</div>
+</div>
+<!-- Left Column (Appointments & Patients) -->
+<div class="col-span-8 flex flex-col gap-gutter">
+<!-- Rendez-vous du jour -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-bright">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="list_alt">list_alt</span>
+                                Rendez-vous du jour
+                            </h3>
+<button class="text-primary hover:text-primary-container font-label-md text-label-md">Voir l'agenda complet</button>
+</div>
+<div class="p-0">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low font-label-md text-label-md text-on-surface-variant">
+<tr>
+<th class="py-sm px-md font-semibold">Heure</th>
+<th class="py-sm px-md font-semibold">Patient</th>
+<th class="py-sm px-md font-semibold">Type de soin</th>
+<th class="py-sm px-md font-semibold">Statut</th>
+<th class="py-sm px-md font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm text-on-surface">
+<!-- Row 1 -->
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-lowest transition-colors">
+<td class="py-sm px-md font-semibold">09:00</td>
+<td class="py-sm px-md flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-[10px] font-bold">ML</div>
+                                            Marie Laurent
+                                        </td>
+<td class="py-sm px-md">Détartrage</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary/10 text-secondary border border-secondary/20 font-label-md text-[10px]">Terminé</span>
+</td>
+<td class="py-sm px-md text-right">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-lowest transition-colors">
+<td class="py-sm px-md font-semibold">10:30</td>
+<td class="py-sm px-md flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center text-[10px] font-bold">JD</div>
+                                            Jean Dupont
+                                        </td>
+<td class="py-sm px-md">Pose d'implant</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-error-container text-on-error-container border border-error-container font-label-md text-[10px]">En salle d'attente</span>
+</td>
+<td class="py-sm px-md text-right">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container-lowest transition-colors bg-surface-container-low/30">
+<td class="py-sm px-md font-semibold text-primary">11:45</td>
+<td class="py-sm px-md flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-[10px] font-bold">SB</div>
+                                            Sophie Martin
+                                        </td>
+<td class="py-sm px-md">Consultation contrôle</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-container/10 text-primary-container border border-primary-container/20 font-label-md text-[10px]">Confirmé</span>
+</td>
+<td class="py-sm px-md text-right">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="py-sm px-md font-semibold text-on-surface-variant">14:00</td>
+<td class="py-sm px-md flex items-center gap-2 text-on-surface-variant">
+<div class="w-6 h-6 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center text-[10px] font-bold">LR</div>
+                                            Luc Renault
+                                        </td>
+<td class="py-sm px-md text-on-surface-variant">Extraction</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-variant text-on-surface-variant border border-outline-variant font-label-md text-[10px]">À venir</span>
+</td>
+<td class="py-sm px-md text-right">
+<button class="text-outline hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]" data-icon="more_vert">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Revenue Chart -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] p-md flex-1 flex flex-col">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="trending_up">trending_up</span>
+                                Chiffre d'affaires mensuel
+                            </h3>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Total: <span class="font-semibold text-on-surface">22,300€</span></div>
+</div>
+<div class="relative flex-1 w-full h-48">
+<canvas id="revenueChart"></canvas>
+</div>
+</div>
+</div>
+<!-- Right Column (Charts & Alerts) -->
+<div class="col-span-4 flex flex-col gap-gutter">
+<!-- Repartition Chart (Doughnut) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] p-md">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="pie_chart">pie_chart</span>
+                            Statuts RDV
+                        </h3>
+<div class="relative w-full h-48 flex justify-center">
+<canvas id="statusChart"></canvas>
+</div>
+</div>
+<!-- Stock Alerts -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.05)] p-md flex-1">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-[20px]" data-icon="warning">warning</span>
+                                Alertes Stock
+                            </h3>
+<button class="text-primary hover:text-primary-container font-label-md text-label-md">Commander</button>
+</div>
+<div class="space-y-3">
+<!-- Alert 1 -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-error-container/20 border border-error-container/50">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-surface flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-error text-[18px]" data-icon="vaccines">vaccines</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Anesthésie locale</p>
+<p class="font-label-md text-label-md text-error">Critique (2 restants)</p>
+</div>
+</div>
+</div>
+<!-- Alert 2 -->
+<div class="flex items-center justify-between p-2 rounded-lg hover:bg-surface-container-low border border-transparent transition-colors">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-surface flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" data-icon="masks">masks</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Masques chirurgicaux</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Bas (1 boite)</p>
+</div>
+</div>
+</div>
+<!-- Alert 3 -->
+<div class="flex items-center justify-between p-2 rounded-lg hover:bg-surface-container-low border border-transparent transition-colors">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-surface flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" data-icon="sanitizer">sanitizer</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Gel hydroalcoolique</p>
+<p class="font-label-md text-label-md text-on-surface-variant">À surveiller (3 flacons)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Chart Initializations -->
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Colors from theme
+            const colorPrimary = '#005e97';
+            const colorSecondary = '#006b5f';
+            const colorError = '#ba1a1a';
+            const colorSurfaceVariant = '#d5e3fc';
+            const colorText = '#404751';
+
+            // Chart.js defaults for modern look
+            Chart.defaults.font.family = 'Inter, sans-serif';
+            Chart.defaults.color = colorText;
+            Chart.defaults.plugins.tooltip.backgroundColor = '#233144';
+            Chart.defaults.plugins.tooltip.padding = 10;
+            Chart.defaults.plugins.tooltip.cornerRadius = 8;
+
+            // Revenue Line Chart
+            const ctxRevenue = document.getElementById('revenueChart').getContext('2d');
+            
+            // Create gradient
+            let gradient = ctxRevenue.createLinearGradient(0, 0, 0, 200);
+            gradient.addColorStop(0, 'rgba(0, 94, 151, 0.2)');   
+            gradient.addColorStop(1, 'rgba(0, 94, 151, 0)');
+
+            new Chart(ctxRevenue, {
+                type: 'line',
+                data: {
+                    labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+                    datasets: [{
+                        label: 'CA Quotidien (€)',
+                        data: [1200, 1900, 1500, 2100, 1450, 800],
+                        borderColor: colorPrimary,
+                        backgroundColor: gradient,
+                        borderWidth: 2,
+                        pointBackgroundColor: '#ffffff',
+                        pointBorderColor: colorPrimary,
+                        pointBorderWidth: 2,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(112, 120, 130, 0.1)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: { size: 11 }
+                            }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: {
+                                font: { size: 11 }
+                            }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                }
+            });
+
+            // Status Doughnut Chart
+            const ctxStatus = document.getElementById('statusChart').getContext('2d');
+            new Chart(ctxStatus, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Terminés', 'En attente', 'À venir', 'Annulés'],
+                    datasets: [{
+                        data: [12, 3, 5, 1],
+                        backgroundColor: [
+                            colorSecondary, // Terminé (greenish)
+                            '#f59e0b',      // En attente (amber/orange custom just for clarity, or use secondary-container)
+                            colorPrimary,   // A venir (blue)
+                            colorError      // Annulé (red)
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 15,
+                                font: { size: 11 }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>

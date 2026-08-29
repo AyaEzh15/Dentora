@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sérénité Dentaire - Calendrier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#c0c7d2",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#c4c7c9",
+                    "on-primary-fixed-variant": "#004a79",
+                    "on-primary-fixed": "#001d34",
+                    "on-surface-variant": "#404751",
+                    "on-primary-container": "#f7f9ff",
+                    "background": "#f8f9ff",
+                    "inverse-primary": "#9acbff",
+                    "surface": "#f8f9ff",
+                    "primary-fixed": "#cfe5ff",
+                    "on-secondary-fixed": "#00201c",
+                    "inverse-surface": "#233144",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#76f4e0",
+                    "surface-tint": "#00629e",
+                    "secondary": "#006b5f",
+                    "primary": "#005e97",
+                    "on-tertiary-fixed-variant": "#444749",
+                    "on-surface": "#0d1c2e",
+                    "on-tertiary-container": "#f8fafc",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#005047",
+                    "tertiary": "#575b5c",
+                    "on-tertiary-fixed": "#191c1e",
+                    "outline": "#707882",
+                    "surface-dim": "#ccdbf3",
+                    "surface-container": "#e6eeff",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#dce9ff",
+                    "primary-fixed-dim": "#9acbff",
+                    "tertiary-fixed": "#e0e3e5",
+                    "tertiary-container": "#707375",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8f9ff",
+                    "secondary-fixed-dim": "#59dbc7",
+                    "on-primary": "#ffffff",
+                    "on-secondary-container": "#006f63",
+                    "primary-container": "#0077be",
+                    "surface-variant": "#d5e3fc",
+                    "surface-container-highest": "#d5e3fc",
+                    "surface-container-low": "#eff4ff",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#0d1c2e",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#79f7e3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "margin": "24px",
+                    "lg": "24px",
+                    "base": "4px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar (from JSON) -->
+<nav class="hidden md:flex bg-surface dark:bg-surface text-primary dark:text-inverse-primary font-body-md text-body-md h-screen w-64 fixed left-0 top-0 overflow-y-auto border-r border-outline-variant dark:border-outline flex-col py-lg z-40">
+<div class="px-md mb-lg">
+<div class="flex items-center gap-3 mb-2">
+<img alt="Clinic Logo" class="w-10 h-10 rounded bg-primary-container" data-alt="A minimalist geometric logo for a modern dental clinic featuring a stylized tooth integrated with a subtle smile curve. The design uses crisp, clean lines in primary blue and pure white, creating a highly professional and trustworthy aesthetic suitable for a high-end medical SaaS application. Bright, flat studio lighting emphasizes the sharp vector graphics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQgeMEn9cNDGy8t7fv7J0CJv-KLFzOZPI0wUheP3oTRnW0n2AeRWheRk5CZbTQNPZsKa7v-oxFaxVNodgIZhjzr-Zipk9C1MVjduzQCte3ep6RopdAPBUMfBMEVErQc4gQbkY7ZG9hAiFxqiRekFug-nf9dTW4G23YdEAoTpzkJZrzXXhG-qr_0h2186uH2f8sPQNh4_m5Rbg5jrwahoJYWBwSDUqvbeJ7APpTtoaUlE4Ii9BI4i5mMQ"/>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">DentalPro Clinic</h1>
+</div>
+<p class="text-body-sm text-on-surface-variant pl-13">Management Suite</p>
+</div>
+<div class="flex-1 overflow-y-auto mt-4">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                        Tableau de bord
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+                        Patients
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">event</span>
+                        Rendez-vous
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded-r-full text-primary dark:text-inverse-primary font-bold border-r-4 border-primary bg-primary-container/10" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+                        Calendrier
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+                        Consultations
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+                        Dossiers dentaires
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">assignment</span>
+                        Plans de traitement
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">description</span>
+                        Ordonnances
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">payments</span>
+                        Facturation &amp; Paiements
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                        Dépenses
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                        Stock
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">description</span>
+                        Documents
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                        Statistiques &amp; Rapports
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+                        Personnel
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-md py-sm mx-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-variant transition-colors active:opacity-80 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+                        Paramètres
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- TopNavBar (from JSON) -->
+<header class="hidden md:flex bg-surface dark:bg-surface text-primary dark:text-inverse-primary font-body-md text-body-md fixed top-0 right-0 w-[calc(100%-16rem)] z-50 border-b border-outline-variant dark:border-outline justify-between items-center px-lg h-16 shadow-[0px_4px_12px_rgba(0,0,0,0.02)]">
+<div class="flex items-center flex-1">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-full text-body-sm focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary-container/20 transition-all" placeholder="Rechercher patient, rdv..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-variant rounded-full active:scale-95 transition-transform mr-md">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="flex items-center gap-3 border-l border-outline-variant pl-md cursor-pointer hover:opacity-80 transition-opacity">
+<img alt="Dr. Smith Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a smiling male dentist wearing light blue scrubs. The portrait is sharply focused, well-lit with bright, clean clinical studio lighting against a pure white background. The mood is approachable, trustworthy, and modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDI4Mszceoq_uQ6Ne5IWFBla_Thuui7rBHR3FVOlQ-5GBx1m0_ql2nCIYHyDiZoYaE6LVgsTn4Pz3JasCLiqJSz1Dya2IN05iv5gfSK_fviV7da--TFeW6OnDojHtGCRqlipFtZ1Q4Zj2q2kpIN6HZcasIn8kAtVYH9oXJujff7FSuvAI1MuLOonG4-ChS8m8Y-LF5FeNh2KKKYx9LETRDkLm8bTxwmQ_USFNfUVWXazcXLD2lU5QAJkw"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="w-full md:ml-64 mt-0 md:mt-16 p-md md:p-lg flex flex-col md:flex-row gap-lg bg-surface-bright min-h-[calc(100vh-4rem)]">
+<!-- Left Sidebar (Mini Calendar & Waiting Room) -->
+<aside class="w-full md:w-72 flex flex-col gap-lg shrink-0">
+<!-- Mini Calendar Card -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-md shadow-[0px_4px_12px_rgba(0,0,0,0.05)]">
+<div class="flex justify-between items-center mb-4">
+<button class="p-1 hover:bg-surface-container-low rounded-full transition-colors"><span class="material-symbols-outlined text-on-surface-variant">chevron_left</span></button>
+<span class="font-label-md text-on-surface font-semibold uppercase">Octobre 2023</span>
+<button class="p-1 hover:bg-surface-container-low rounded-full transition-colors"><span class="material-symbols-outlined text-on-surface-variant">chevron_right</span></button>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center mb-2">
+<span class="text-label-md text-on-surface-variant">L</span>
+<span class="text-label-md text-on-surface-variant">M</span>
+<span class="text-label-md text-on-surface-variant">M</span>
+<span class="text-label-md text-on-surface-variant">J</span>
+<span class="text-label-md text-on-surface-variant">V</span>
+<span class="text-label-md text-on-surface-variant">S</span>
+<span class="text-label-md text-on-surface-variant">D</span>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center text-body-sm">
+<!-- Dummy days for visual -->
+<div class="p-1 text-outline">25</div><div class="p-1 text-outline">26</div><div class="p-1 text-outline">27</div><div class="p-1 text-outline">28</div><div class="p-1 text-outline">29</div><div class="p-1 text-outline">30</div><div class="p-1">1</div>
+<div class="p-1">2</div><div class="p-1">3</div><div class="p-1">4</div><div class="p-1">5</div><div class="p-1">6</div><div class="p-1">7</div><div class="p-1">8</div>
+<div class="p-1">9</div><div class="p-1">10</div><div class="p-1">11</div><div class="p-1 bg-primary text-on-primary rounded-full font-semibold">12</div><div class="p-1">13</div><div class="p-1">14</div><div class="p-1">15</div>
+<div class="p-1">16</div><div class="p-1">17</div><div class="p-1">18</div><div class="p-1">19</div><div class="p-1">20</div><div class="p-1">21</div><div class="p-1">22</div>
+<div class="p-1">23</div><div class="p-1">24</div><div class="p-1">25</div><div class="p-1">26</div><div class="p-1">27</div><div class="p-1">28</div><div class="p-1">29</div>
+<div class="p-1">30</div><div class="p-1">31</div><div class="p-1 text-outline">1</div><div class="p-1 text-outline">2</div><div class="p-1 text-outline">3</div><div class="p-1 text-outline">4</div><div class="p-1 text-outline">5</div>
+</div>
+</div>
+<!-- Waiting Room -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant p-md flex-1 shadow-[0px_4px_12px_rgba(0,0,0,0.05)]">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">Salle d'attente</h3>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full text-label-md">2</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 p-3 rounded-lg border border-outline-variant/50 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-2 h-2 rounded-full bg-secondary-fixed"></div>
+<div class="flex-1">
+<p class="font-label-md text-on-surface">Marie Dupont</p>
+<p class="text-body-sm text-on-surface-variant">09:00 - Dr. Smith</p>
+</div>
+<span class="text-label-md text-outline">15 min</span>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg border border-outline-variant/50 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-2 h-2 rounded-full bg-secondary-fixed"></div>
+<div class="flex-1">
+<p class="font-label-md text-on-surface">Jean Martin</p>
+<p class="text-body-sm text-on-surface-variant">09:30 - Dr. Jones</p>
+</div>
+<span class="text-label-md text-outline">Arr.</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Calendar Area -->
+<div class="flex-1 flex flex-col bg-surface-container-lowest rounded-lg border border-outline-variant shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
+<!-- Calendar Header / Toolbar -->
+<div class="p-md border-b border-outline-variant flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4 bg-surface-bright">
+<div class="flex items-center gap-4">
+<button class="bg-primary-container hover:bg-primary text-on-primary-container hover:text-on-primary px-4 py-2 rounded-lg font-label-md flex items-center gap-2 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        Nouveau rendez-vous
+                    </button>
+<div class="flex items-center rounded-lg border border-outline-variant bg-surface-container-lowest overflow-hidden">
+<button class="px-3 py-1.5 text-body-sm text-on-surface-variant hover:bg-surface-container-low border-r border-outline-variant transition-colors">Aujourd'hui</button>
+<button class="px-2 py-1.5 text-on-surface-variant hover:bg-surface-container-low border-r border-outline-variant transition-colors"><span class="material-symbols-outlined text-[20px]">chevron_left</span></button>
+<button class="px-2 py-1.5 text-on-surface-variant hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[20px]">chevron_right</span></button>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface ml-2">12 - 18 Octobre 2023</h2>
+</div>
+<div class="flex items-center gap-4 w-full xl:w-auto overflow-x-auto pb-2 xl:pb-0 hide-scrollbar">
+<!-- Filters -->
+<div class="flex items-center gap-2 border-r border-outline-variant pr-4 shrink-0">
+<select class="bg-surface-container-lowest border border-outline-variant text-body-sm rounded-md px-3 py-1.5 focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option>Tous les praticiens</option>
+<option>Dr. Smith</option>
+<option>Dr. Jones</option>
+</select>
+<select class="bg-surface-container-lowest border border-outline-variant text-body-sm rounded-md px-3 py-1.5 focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+<option>Tous les statuts</option>
+<option>Confirmé</option>
+<option>En attente</option>
+<option>Arrivé</option>
+</select>
+</div>
+<!-- View Toggles -->
+<div class="flex items-center rounded-lg border border-outline-variant bg-surface-container-lowest overflow-hidden shrink-0">
+<button class="px-3 py-1.5 text-body-sm text-on-surface-variant hover:bg-surface-container-low border-r border-outline-variant transition-colors">Jour</button>
+<button class="px-3 py-1.5 text-body-sm bg-surface-variant text-on-surface border-r border-outline-variant font-semibold">Semaine</button>
+<button class="px-3 py-1.5 text-body-sm text-on-surface-variant hover:bg-surface-container-low border-r border-outline-variant transition-colors">Mois</button>
+<button class="px-3 py-1.5 text-body-sm text-on-surface-variant hover:bg-surface-container-low transition-colors">Liste</button>
+</div>
+</div>
+</div>
+<!-- Calendar Grid (Weekly) -->
+<div class="flex-1 overflow-y-auto relative bg-surface-container-lowest">
+<!-- Grid Header -->
+<div class="grid grid-cols-[60px_1fr_1fr_1fr_1fr_1fr_1fr_1fr] border-b border-outline-variant sticky top-0 bg-surface-container-lowest z-20 shadow-sm">
+<div class="p-2 border-r border-outline-variant flex items-end justify-center text-label-md text-outline bg-surface-bright">GMT+1</div>
+<div class="p-2 text-center border-r border-outline-variant">
+<div class="text-label-md text-on-surface-variant uppercase">Lun</div>
+<div class="text-headline-md font-bold text-on-surface">12</div>
+</div>
+<div class="p-2 text-center border-r border-outline-variant bg-surface-container-low">
+<div class="text-label-md text-primary uppercase">Mar</div>
+<div class="text-headline-md font-bold text-primary">13</div>
+</div>
+<div class="p-2 text-center border-r border-outline-variant">
+<div class="text-label-md text-on-surface-variant uppercase">Mer</div>
+<div class="text-headline-md font-bold text-on-surface">14</div>
+</div>
+<div class="p-2 text-center border-r border-outline-variant">
+<div class="text-label-md text-on-surface-variant uppercase">Jeu</div>
+<div class="text-headline-md font-bold text-on-surface">15</div>
+</div>
+<div class="p-2 text-center border-r border-outline-variant">
+<div class="text-label-md text-on-surface-variant uppercase">Ven</div>
+<div class="text-headline-md font-bold text-on-surface">16</div>
+</div>
+<div class="p-2 text-center border-r border-outline-variant">
+<div class="text-label-md text-on-surface-variant uppercase">Sam</div>
+<div class="text-headline-md font-bold text-on-surface">17</div>
+</div>
+<div class="p-2 text-center">
+<div class="text-label-md text-on-surface-variant uppercase">Dim</div>
+<div class="text-headline-md font-bold text-on-surface">18</div>
+</div>
+</div>
+<!-- Grid Body -->
+<div class="relative min-w-[800px]">
+<!-- Time slots background -->
+<!-- 08:00 to 19:00 = 11 hours. Each hour = 80px height -->
+<div class="grid grid-cols-[60px_1fr_1fr_1fr_1fr_1fr_1fr_1fr] relative">
+<!-- Time labels column -->
+<div class="border-r border-outline-variant bg-surface-bright text-right pr-2">
+<div class="h-[80px] flex items-start justify-end pt-[-8px] text-label-md text-outline border-b border-transparent relative"><span class="absolute -top-3">08:00</span></div>
+<div class="h-[80px] border-b border-outline-variant/30 relative"><span class="absolute -top-3 right-2 text-label-md text-outline">09:00</span></div>
+<div class="h-[80px] border-b border-outline-variant/30 relative"><span class="absolute -top-3 right-2 text-label-md text-outline">10:00</span></div>
+<div class="h-[80px] border-b border-outline-variant/30 relative"><span class="absolute -top-3 right-2 text-label-md text-outline">11:00</span></div>
+<div class="h-[80px] border-b border-outline-variant/30 relative"><span class="absolute -top-3 right-2 text-label-md text-outline">12:00</span></div>
+<div class="h-[80px] border-b border-outline-variant/30 relative"><span class="absolute -top-3 right-2 text-label-md text-outline">13:00</span></div>
+<div class="h-[80px] border-b border-outline-variant/30 relative"><span class="absolute -top-3 right-2 text-label-md text-outline">14:00</span></div>
+<div class="h-[80px] border-b border-outline-variant/30 relative"><span class="absolute -top-3 right-2 text-label-md text-outline">15:00</span></div>
+<div class="h-[80px] border-b border-outline-variant/30 relative"><span class="absolute -top-3 right-2 text-label-md text-outline">16:00</span></div>
+<div class="h-[80px] border-b border-outline-variant/30 relative"><span class="absolute -top-3 right-2 text-label-md text-outline">17:00</span></div>
+<div class="h-[80px] border-b border-outline-variant/30 relative"><span class="absolute -top-3 right-2 text-label-md text-outline">18:00</span></div>
+<div class="h-[80px] relative"><span class="absolute -top-3 right-2 text-label-md text-outline">19:00</span></div>
+</div>
+<!-- Day columns (1 to 7) -->
+<div class="border-r border-outline-variant/50 relative">
+<!-- Mon lines -->
+<div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px]"></div>
+</div>
+<div class="border-r border-outline-variant/50 relative bg-surface-container-low/30">
+<!-- Tue lines -->
+<div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px]"></div>
+</div>
+<div class="border-r border-outline-variant/50 relative">
+<!-- Wed lines -->
+<div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px]"></div>
+</div>
+<div class="border-r border-outline-variant/50 relative">
+<!-- Thu lines -->
+<div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px]"></div>
+</div>
+<div class="border-r border-outline-variant/50 relative">
+<!-- Fri lines -->
+<div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px]"></div>
+</div>
+<div class="border-r border-outline-variant/50 relative bg-surface-bright/50">
+<!-- Sat lines -->
+<div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px]"></div>
+</div>
+<div class="relative bg-surface-bright/50">
+<!-- Sun lines -->
+<div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px] border-b border-outline-variant/30"></div><div class="h-[80px]"></div>
+</div>
+</div>
+<!-- Appointments Overlay (Absolute positioning over the grid) -->
+<!-- Calculations: top = (hour - 8) * 80 + (minute / 60) * 80. height = (duration / 60) * 80 -->
+<!-- Col 2 (Tuesday) -->
+<!-- Appt 1: 09:00 - 10:00 (Top: 80px, Height: 80px) -->
+<div class="absolute top-[80px] left-[calc(60px+(100%-60px)/7*1)] w-[calc((100%-60px)/7-8px)] h-[80px] ml-1 mt-1 p-2 rounded border-l-4 border-secondary-fixed bg-secondary-container/20 hover:bg-secondary-container/40 transition-colors cursor-pointer shadow-sm z-10 flex flex-col overflow-hidden">
+<span class="font-label-md text-on-surface truncate">Marie Dupont</span>
+<span class="text-body-sm text-on-surface-variant truncate">09:00 - Détartrage</span>
+<div class="mt-auto flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary-fixed"></div>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-wider">Arrivé</span>
+</div>
+</div>
+<!-- Appt 2: 10:30 - 11:30 (Top: 200px, Height: 80px) -->
+<div class="absolute top-[200px] left-[calc(60px+(100%-60px)/7*1)] w-[calc((100%-60px)/7-8px)] h-[80px] ml-1 mt-1 p-2 rounded border-l-4 border-primary bg-primary-container/20 hover:bg-primary-container/40 transition-colors cursor-pointer shadow-sm z-10 flex flex-col overflow-hidden">
+<span class="font-label-md text-on-surface truncate">Luc Bernard</span>
+<span class="text-body-sm text-on-surface-variant truncate">10:30 - Consultation</span>
+<div class="mt-auto flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-wider">Confirmé</span>
+</div>
+</div>
+<!-- Col 3 (Wednesday) -->
+<!-- Appt 3: 14:00 - 15:30 (Top: 480px, Height: 120px) -->
+<div class="absolute top-[480px] left-[calc(60px+(100%-60px)/7*2)] w-[calc((100%-60px)/7-8px)] h-[120px] ml-1 mt-1 p-2 rounded border-l-4 border-[#eab308] bg-[#fef08a]/30 hover:bg-[#fef08a]/50 transition-colors cursor-pointer shadow-sm z-10 flex flex-col overflow-hidden">
+<span class="font-label-md text-on-surface truncate">Sophie Martin</span>
+<span class="text-body-sm text-on-surface-variant truncate">14:00 - Couronne (Pose)</span>
+<div class="mt-auto flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-[#eab308]"></div>
+<span class="text-[10px] text-on-surface-variant uppercase tracking-wider">En attente</span>
+</div>
+</div>
+<!-- Col 4 (Thursday) -->
+<!-- Appt 4: 11:00 - 11:45 (Top: 240px, Height: 60px) -->
+<div class="absolute top-[240px] left-[calc(60px+(100%-60px)/7*3)] w-[calc((100%-60px)/7-8px)] h-[60px] ml-1 mt-1 p-2 rounded border-l-4 border-error bg-error-container/30 hover:bg-error-container/50 transition-colors cursor-pointer shadow-sm z-10 flex flex-col overflow-hidden">
+<span class="font-label-md text-on-error-container truncate">Urgence - Anonyme</span>
+<span class="text-body-sm text-on-error-container/80 truncate">11:00 - Douleur aigüe</span>
+</div>
+<!-- Current Time Indicator (e.g. Tuesday 10:15 = Top: 180px) -->
+<div class="absolute top-[180px] left-[60px] right-0 h-[2px] bg-error z-20 pointer-events-none flex items-center">
+<div class="w-2 h-2 rounded-full bg-error -ml-1"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
