@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enums\UserRole;
 use App\Models\Clinic;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Database\Seeder;
 
 class ClinicUserSeeder extends Seeder
@@ -46,7 +47,7 @@ class ClinicUserSeeder extends Seeder
                 'first_name' => 'Ahmed',
                 'last_name' => 'Alaoui',
                 'phone' => '+212 6 00 00 00 03',
-                'role' => UserRole::ADMIN,
+                'role' => UserRole::DENTIST,
             ],
         ];
 
@@ -66,6 +67,10 @@ class ClinicUserSeeder extends Seeder
             );
 
             $user->syncRoles([$data['role']->value]);
+
+            if ($data['role'] === UserRole::DENTIST) {
+                app(UserService::class)->attachDefaultTemplates($user);
+            }
         }
     }
 }

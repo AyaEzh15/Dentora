@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\StoreUserRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
+use App\Http\Requests\Users\UploadDentistTemplatesRequest;
 use App\Http\Resources\UserResource;
 use App\Services\UserService;
 use App\Support\ApiResponse;
@@ -52,5 +53,19 @@ class UserController extends Controller
         $updated = $this->userService->update($request->user(), $user, $request->validated());
 
         return ApiResponse::success(new UserResource($updated), 'Membre mis à jour.');
+    }
+
+    public function templates(UploadDentistTemplatesRequest $request, int $user): JsonResponse
+    {
+        $updated = $this->userService->uploadTemplates(
+            $request->user(),
+            $user,
+            array_filter([
+                'prescription_template' => $request->file('prescription_template'),
+                'invoice_template' => $request->file('invoice_template'),
+            ])
+        );
+
+        return ApiResponse::success(new UserResource($updated), 'Modèles PDF enregistrés.');
     }
 }

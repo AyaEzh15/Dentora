@@ -9,13 +9,14 @@ import {
   Typography,
 } from '@mui/material'
 import AppLogo from '@/components/common/AppLogo'
-import { NAV_SECTIONS } from '@/constants/nav'
+import { ADMIN_NAV_SECTIONS, NAV_SECTIONS } from '@/constants/nav'
 import { useAuth } from '@/context/AuthContext'
 
 const DRAWER_WIDTH = 256
 
 export default function Sidebar({ mobileOpen, onClose }) {
-  const { clinic, hasPermission } = useAuth()
+  const { clinic, hasPermission, isAdmin } = useAuth()
+  const sections = isAdmin ? ADMIN_NAV_SECTIONS : NAV_SECTIONS
 
   const content = (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', py: 3 }}>
@@ -34,7 +35,7 @@ export default function Sidebar({ mobileOpen, onClose }) {
       </Box>
 
       <Box sx={{ flex: 1, overflowY: 'auto', px: 1 }}>
-        {NAV_SECTIONS.map((section) => {
+        {sections.map((section) => {
           const items = section.items.filter(
             (item) => !item.permission || hasPermission(item.permission)
           )

@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use App\Enums\AppointmentStatus;
 use App\Enums\ConsultationStatus;
 use App\Enums\Gender;
+use App\Enums\InvoiceStatus;
+use App\Enums\PaymentMethod;
+use App\Enums\PrescriptionStatus;
 use App\Enums\ToothCondition;
 use App\Enums\TreatmentPhaseStatus;
 use App\Enums\TreatmentPlanStatus;
@@ -12,9 +15,11 @@ use App\Models\Appointment;
 use App\Models\CareType;
 use App\Models\Clinic;
 use App\Models\Consultation;
+use App\Models\Invoice;
 use App\Models\MedicalRecord;
 use App\Models\OdontogramTooth;
 use App\Models\Patient;
+use App\Models\Prescription;
 use App\Models\TreatmentPlan;
 use App\Models\User;
 use Illuminate\Support\Str;
@@ -249,5 +254,76 @@ class OperationalDataSeeder extends Seeder
         if ($couronne) {
             $phase3->items()->create(['care_type_id' => $couronne->id, 'tooth_number' => '46', 'status' => 'PLANNED']);
         }
+
+        $invoice = Invoice::query()->updateOrCreate(
+            ['consultation_id' => $consultation->id],
+            [
+                'clinic_id' => $clinic->id,
+                'patient_id' => $sara->id,
+                'dentist_id' => $dentist->id,
+                'number' => 'FAC-'.now()->year.'-0001',
+                'issued_at' => today()->setTime(9, 50),
+                'status' => InvoiceStatus::PAID,
+                'subtotal' => 350,
+                'tax_amount' => 0,
+                'total' => 350,
+                'paid_amount' => 350,
+                'notes' => 'Détartrage du jour.',
+                'created_by' => $admin?->id,
+            ]
+        );
+
+        $invoice->items()->delete();
+        $invoice->items()->create([
+            'care_type_id' => $detartrage?->id,
+            'description' => $detartrage?->name ?? 'Détartrage',
+            'quantity' => 1,
+            'unit_price' => 350,
+            'line_total' => 350,
+        ]);
+
+        $invoice->payments()->delete();
+        $invoice->payments()->create([
+            'clinic_id' => $clinic->id,
+            'amount' => 350,
+            'method' => PaymentMethod::CASH,
+            'paid_at' => today()->setTime(10, 0),
+            'reference' => 'ESP-001',
+            'created_by' => $admin?->id,
+        ]);
+
+        $prescription = Prescription::query()->updateOrCreate(
+            [
+                'clinic_id' => $clinic->id,
+                'patient_id' => $sara->id,
+                'number' => 'ORD-'.now()->year.'-0001',
+            ],
+            [
+                'dentist_id' => $dentist->id,
+                'consultation_id' => $consultation->id,
+                'prescribed_at' => today()->setTime(9, 40),
+                'status' => PrescriptionStatus::ISSUED,
+                'notes' => 'Hygiène et bain de bouche pendant 7 jours.',
+                'created_by' => $dentist->id,
+            ]
+        );
+
+        $prescription->items()->delete();
+        $prescription->items()->create([
+            'medication' => 'Bain de bouche chlorhexidine 0,12 %',
+            'dosage' => '15 ml',
+            'frequency' => '2 fois par jour',
+            'duration' => '7 jours',
+            'quantity' => 1,
+            'instructions' => 'Après le brossage, ne pas rincer à l’eau.',
+        ]);
+        $prescription->items()->create([
+            'medication' => 'Paracétamol 500 mg',
+            'dosage' => '1 comprimé',
+            'frequency' => 'Si douleur, max 3 fois / jour',
+            'duration' => '3 jours',
+            'quantity' => 1,
+            'instructions' => 'Respecter 6 h entre deux prises.',
+        ]);
     }
 }

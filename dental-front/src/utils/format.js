@@ -71,3 +71,13 @@ export function toTimeInput(value) {
 
   return `${pad(date.getHours())}:${pad(date.getMinutes())}`
 }
+
+export function formatMoney(value) {
+  const amount = Number(value || 0)
+
+  return new Intl.NumberFormat('fr-MA', {
+    style: 'currency',
+    currency: 'MAD',
+    minimumFractionDigits: 2,
+  }).format(amount)
+}

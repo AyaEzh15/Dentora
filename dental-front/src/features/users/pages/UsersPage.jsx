@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
@@ -22,6 +23,7 @@ import {
 } from '@mui/material'
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined'
+import MedicalInformationOutlinedIcon from '@mui/icons-material/MedicalInformationOutlined'
 import PageHeader from '@/components/common/PageHeader'
 import StatusChip from '@/components/common/StatusChip'
 import ErrorAlert from '@/components/common/ErrorAlert'
@@ -38,6 +40,7 @@ const ROLES = [
 ]
 
 export default function UsersPage() {
+  const navigate = useNavigate()
   const { data, isLoading, error } = useUsers()
   const [open, setOpen] = useState(false)
   const [editing, setEditing] = useState(null)
@@ -46,7 +49,7 @@ export default function UsersPage() {
     <>
       <PageHeader
         title="Personnel"
-        subtitle="Gérez les membres du cabinet et leurs rôles."
+        subtitle="Comptes du cabinet : administrateurs, dentistes, assistants et secrétaires."
         actions={
           <Button
             variant="contained"
@@ -90,6 +93,11 @@ export default function UsersPage() {
                     <StatusChip label={user.isActive ? 'Actif' : 'Inactif'} tone={user.isActive ? 'success' : 'muted'} />
                   </TableCell>
                   <TableCell align="right">
+                    {user.role === 'DENTIST' ? (
+                      <IconButton size="small" onClick={() => navigate(`/dentists/${user.id}`)} aria-label="Espace dentiste">
+                        <MedicalInformationOutlinedIcon fontSize="small" />
+                      </IconButton>
+                    ) : null}
                     <IconButton
                       size="small"
                       onClick={() => {
@@ -170,6 +178,9 @@ function UserDialog({ open, user, onClose }) {
               </MenuItem>
             ))}
           </TextField>
+          <Typography variant="body2" color="text.secondary">
+            Les PDF Canva d’ordonnance et de facture se gèrent dans l’espace de chaque dentiste.
+          </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Controller
               name="is_active"

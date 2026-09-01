@@ -57,11 +57,19 @@ class PatientService
 
     private function scopeForActor(User $user, array $filters = []): array
     {
+        $scoped = [
+            'search' => $filters['search'] ?? null,
+            'is_active' => $filters['is_active'] ?? ($filters['isActive'] ?? null),
+            'per_page' => $filters['per_page'] ?? ($filters['perPage'] ?? null),
+        ];
+
         if ($user->hasRole(UserRole::DENTIST->value)) {
-            $filters['dentist_id'] = $user->id;
+            $scoped['dentist_id'] = $user->id;
+        } elseif (! empty($filters['dentist_id'])) {
+            $scoped['dentist_id'] = $filters['dentist_id'];
         }
 
-        return $filters;
+        return array_filter($scoped, fn ($value) => $value !== null && $value !== '');
     }
 
     public function canAccessPatient(User $user, Patient $patient): bool

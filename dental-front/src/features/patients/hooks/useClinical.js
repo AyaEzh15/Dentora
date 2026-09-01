@@ -41,9 +41,10 @@ export function useSaveOdontogram(patientId) {
   })
 }
 
-export function useConsultations(params) {
+export function useConsultations(params, options = {}) {
   return useQuery({
     queryKey: ['consultations', params],
+    enabled: options.enabled ?? true,
     queryFn: async () => {
       const { data } = await clinicalApi.getConsultations(params)
       return data.data

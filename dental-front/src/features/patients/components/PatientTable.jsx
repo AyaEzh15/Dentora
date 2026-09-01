@@ -15,8 +15,10 @@ import StatusChip from '@/components/common/StatusChip'
 import EmptyState from '@/components/common/EmptyState'
 import { formatDate, initials } from '@/utils/format'
 
-export default function PatientTable({ items = [], meta, page, onPageChange }) {
+export default function PatientTable({ items = [], meta, page, onPageChange, readOnly = false, fromDentist }) {
   const navigate = useNavigate()
+  const patientPath = (patientId) =>
+    `/patients/${patientId}${fromDentist ? `?fromDentist=${fromDentist}` : ''}`
 
   if (!items.length) {
     return <EmptyState title="Aucun patient" description="Créez un premier dossier patient." />
@@ -64,12 +66,14 @@ export default function PatientTable({ items = [], meta, page, onPageChange }) {
                 <StatusChip label={patient.isActive ? 'Actif' : 'Inactif'} tone={patient.isActive ? 'success' : 'muted'} />
               </TableCell>
               <TableCell align="right">
-                <IconButton size="small" onClick={() => navigate(`/patients/${patient.id}`)}>
+                <IconButton size="small" onClick={() => navigate(patientPath(patient.id))}>
                   <VisibilityOutlinedIcon fontSize="small" />
                 </IconButton>
-                <IconButton size="small" onClick={() => navigate(`/patients/${patient.id}/edit`)}>
-                  <EditOutlinedIcon fontSize="small" />
-                </IconButton>
+                {readOnly ? null : (
+                  <IconButton size="small" onClick={() => navigate(`/patients/${patient.id}/edit`)}>
+                    <EditOutlinedIcon fontSize="small" />
+                  </IconButton>
+                )}
               </TableCell>
             </TableRow>
           ))}

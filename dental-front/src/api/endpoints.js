@@ -24,6 +24,7 @@ export const endpoints = {
     list: '/users',
     dentists: '/users/dentists',
     detail: (id) => `/users/${id}`,
+    templates: (id) => `/users/${id}/templates`,
   },
   clinical: {
     medicalRecord: (patientId) => `/patients/${patientId}/medical-record`,
@@ -32,5 +33,18 @@ export const endpoints = {
     consultation: (id) => `/consultations/${id}`,
     treatmentPlans: '/treatment-plans',
     treatmentPlan: (id) => `/treatment-plans/${id}`,
+  },
+  invoices: {
+    list: '/invoices',
+    detail: (id) => `/invoices/${id}`,
+    pdf: (id) => `/invoices/${id}/pdf`,
+  },
+  payments: {
+    list: '/payments',
+  },
+  prescriptions: {
+    list: '/prescriptions',
+    detail: (id) => `/prescriptions/${id}`,
+    pdf: (id) => `/prescriptions/${id}/pdf`,
   },
 }

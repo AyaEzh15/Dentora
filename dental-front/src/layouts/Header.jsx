@@ -20,7 +20,7 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded'
 import { useAuth } from '@/context/AuthContext'
 
 export default function Header({ onMenuClick }) {
-  const { user, logout } = useAuth()
+  const { user, logout, isAdmin } = useAuth()
   const [anchorEl, setAnchorEl] = useState(null)
 
   const initials = (user?.name || 'U')
@@ -51,7 +51,7 @@ export default function Header({ onMenuClick }) {
 
         <Box sx={{ flex: 1, maxWidth: 384 }}>
           <TextField
-            placeholder="Rechercher un patient, un rdv..."
+            placeholder={isAdmin ? 'Rechercher un dentiste, un patient…' : 'Rechercher un patient, un rdv...'}
             size="small"
             slotProps={{
               input: {

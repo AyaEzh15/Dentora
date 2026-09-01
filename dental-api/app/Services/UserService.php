@@ -44,6 +44,10 @@ class UserService
         $user = $this->users->create($data);
         $user->syncRoles([$role]);
 
+        if ($role === UserRole::DENTIST->value) {
+            $this->attachDefaultTemplates($user);
+        }
+
         return $user->load('roles');
     }
 
@@ -70,15 +74,91 @@ class UserService
         return $user->load('roles');
     }
 
-    public function dentists(User $actor): Collection
+    public function uploadTemplates(User $actor, int $id, array $files): User
     {
-        $dentists = $this->users->dentistsForClinic((int) $actor->clinic_id);
+        $user = $this->get($actor, $id);
 
-        if ($dentists->isEmpty() && $actor->hasRole(UserRole::ADMIN->value)) {
-            return collect([$actor]);
+        if (! $user->hasRole(UserRole::DENTIST->value)) {
+            throw ValidationException::withMessages([
+                'role' => ['Les modèles PDF ne s\'appliquent qu\'aux dentistes.'],
+            ]);
         }
 
-        return $dentists;
+        $map = [
+            'prescription_template' => ['column' => 'prescription_template_path', 'file' => 'ordonnance.pdf'],
+            'invoice_template' => ['column' => 'invoice_template_path', 'file' => 'facture.pdf'],
+        ];
+
+        foreach ($map as $input => $meta) {
+            if (empty($files[$input])) {
+                continue;
+            }
+
+            $directory = 'templates/users/'.$user->id;
+            $path = $files[$input]->storeAs($directory, $meta['file'], 'public');
+            $user->{$meta['column']} = $path;
+            $this->rasterizePdf(storage_path('app/public/'.$path));
+        }
+
+        $user->save();
+
+        return $user->fresh('roles');
+    }
+
+    public function attachDefaultTemplates(User $user): User
+    {
+        if (! $user->hasRole(UserRole::DENTIST->value)) {
+            return $user;
+        }
+
+        $directory = 'templates/users/'.$user->id;
+        $disk = \Illuminate\Support\Facades\Storage::disk('public');
+
+        $sources = [
+            'prescription_template_path' => ['ordonnance.pdf', 'ordonnance_dentiste'],
+            'invoice_template_path' => ['facture.pdf', 'facture_dentiste'],
+        ];
+
+        foreach ($sources as $column => [$filename, $source]) {
+            if ($user->{$column}) {
+                continue;
+            }
+
+            $pdf = public_path('documents/'.$source.'.pdf');
+            $png = public_path('documents/'.$source.'.png');
+
+            if (! is_file($pdf)) {
+                continue;
+            }
+
+            $disk->put($directory.'/'.$filename, file_get_contents($pdf));
+            if (is_file($png)) {
+                $disk->put($directory.'/'.preg_replace('/\.pdf$/', '.png', $filename), file_get_contents($png));
+            }
+            $user->{$column} = $directory.'/'.$filename;
+        }
+
+        $user->save();
+
+        return $user->fresh('roles');
+    }
+
+    private function rasterizePdf(string $pdfPath): void
+    {
+        if (! is_file($pdfPath)) {
+            return;
+        }
+
+        $pngPath = preg_replace('/\.pdf$/i', '.png', $pdfPath);
+        $script = 'import pymupdf; doc=pymupdf.open(r"'.$pdfPath.'"); pix=doc[0].get_pixmap(matrix=pymupdf.Matrix(2,2)); pix.save(r"'.$pngPath.'")';
+        @exec('python -c '.escapeshellarg($script));
+    }
+
+    public function dentists(User $actor): Collection
+    {
+        $activeOnly = ! $actor->hasRole(UserRole::ADMIN->value);
+
+        return $this->users->dentistsForClinic((int) $actor->clinic_id, $activeOnly);
     }
 
     public function assertNotLastAdmin(User $target, ?string $nextRole = null): void

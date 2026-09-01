@@ -20,5 +20,5 @@ interface UserRepositoryInterface
 
     public function update(User $user, array $data): User;
 
-    public function dentistsForClinic(int $clinicId): Collection;
+    public function dentistsForClinic(int $clinicId, bool $activeOnly = true): Collection;
 }

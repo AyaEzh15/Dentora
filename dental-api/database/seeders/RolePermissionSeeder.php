@@ -74,7 +74,21 @@ class RolePermissionSeeder extends Seeder
         }
 
         $admin = Role::firstOrCreate(['name' => UserRole::ADMIN->value, 'guard_name' => 'web']);
-        $admin->syncPermissions($permissions);
+        $admin->syncPermissions([
+            'dashboard.view',
+            'patients.view',
+            'consultations.view',
+            'odontogram.view',
+            'treatments.view',
+            'prescriptions.view',
+            'billing.view',
+            'reports.view',
+            'users.view',
+            'users.manage',
+            'care-types.manage',
+            'settings.manage',
+            'documents.view',
+        ]);
 
         $dentist = Role::firstOrCreate(['name' => UserRole::DENTIST->value, 'guard_name' => 'web']);
         $dentist->syncPermissions([

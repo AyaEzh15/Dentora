@@ -22,11 +22,22 @@ import PageHeader from '@/components/common/PageHeader'
 import EmptyState from '@/components/common/EmptyState'
 import ErrorAlert from '@/components/common/ErrorAlert'
 import AppointmentStatusSelect from '@/features/appointments/components/AppointmentStatusSelect'
+import AdminDashboard from '@/features/admin/pages/AdminDashboard'
 import { useAuth } from '@/context/AuthContext'
 import { useDashboard } from '@/features/dashboard/hooks/useDashboard'
 import { formatTime, initials } from '@/utils/format'
 
 export default function DashboardPage() {
+  const { isAdmin } = useAuth()
+
+  if (isAdmin) {
+    return <AdminDashboard />
+  }
+
+  return <OperationalDashboard />
+}
+
+function OperationalDashboard() {
   const navigate = useNavigate()
   const { user, clinic } = useAuth()
   const { data, isLoading, error } = useDashboard()

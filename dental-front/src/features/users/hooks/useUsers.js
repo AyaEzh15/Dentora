@@ -21,6 +21,17 @@ export function useDentists() {
   })
 }
 
+export function useUser(id) {
+  return useQuery({
+    queryKey: ['users', 'detail', id],
+    enabled: Boolean(id),
+    queryFn: async () => {
+      const { data } = await userApi.getById(id)
+      return data.data
+    },
+  })
+}
+
 export function useCreateUser() {
   const queryClient = useQueryClient()
 
@@ -36,5 +47,17 @@ export function useUpdateUser(id) {
   return useMutation({
     mutationFn: (payload) => userApi.update(id, payload),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
+  })
+}
+
+export function useUploadTemplates() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: ({ id, payload }) => userApi.uploadTemplates(id, payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['users'] })
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] })
+    },
   })
 }

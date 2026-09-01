@@ -67,13 +67,33 @@ class UserRepository implements UserRepositoryInterface
         return $user->fresh('roles');
     }
 
-    public function dentistsForClinic(int $clinicId): Collection
+    public function dentistsForClinic(int $clinicId, bool $activeOnly = true): Collection
     {
-        return User::query()
+        $query = User::query()
+            ->select('users.*')
             ->forClinic($clinicId)
-            ->where('is_active', true)
             ->role(UserRole::DENTIST->value)
-            ->orderBy('name')
-            ->get();
+            ->with('roles')
+            ->withCount(['invoices', 'prescriptions'])
+            ->addSelect([
+                'patients_count' => \App\Models\Patient::query()
+                    ->selectRaw('count(*)')
+                    ->where('clinic_id', $clinicId)
+                    ->where(function ($patients) {
+                        $patients->whereColumn('created_by', 'users.id')
+                            ->orWhereIn('id', function ($appointments) {
+                                $appointments->select('patient_id')
+                                    ->from('appointments')
+                                    ->whereColumn('dentist_id', 'users.id');
+                            });
+                    }),
+            ])
+            ->orderBy('name');
+
+        if ($activeOnly) {
+            $query->where('is_active', true);
+        }
+
+        return $query->get();
     }
 }

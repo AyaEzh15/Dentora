@@ -17,6 +17,7 @@ import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined'
 import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined'
 import InsightsOutlinedIcon from '@mui/icons-material/InsightsOutlined'
 import BusinessOutlinedIcon from '@mui/icons-material/BusinessOutlined'
+import MedicalInformationOutlinedIcon from '@mui/icons-material/MedicalInformationOutlined'
 
 export const NAV_SECTIONS = [
   {
@@ -77,10 +78,31 @@ export const NAV_SECTIONS = [
   },
 ]
 
+export const ADMIN_NAV_SECTIONS = [
+  {
+    title: 'Pilotage',
+    items: [
+      { label: 'Vue d’ensemble', path: '/dashboard', icon: DashboardOutlinedIcon, permission: 'dashboard.view' },
+    ],
+  },
+  {
+    title: 'Cabinet',
+    items: [
+      { label: 'Dentistes', path: '/dentists', icon: MedicalInformationOutlinedIcon, permission: 'users.view' },
+      { label: 'Personnel', path: '/users', icon: GroupOutlinedIcon, permission: 'users.view' },
+      { label: 'Types de soins', path: '/care-types', icon: HealthAndSafetyOutlinedIcon, permission: 'care-types.manage' },
+    ],
+  },
+  {
+    title: 'Configuration',
+    items: [
+      { label: 'Cabinet', path: '/clinics', icon: BusinessOutlinedIcon, permission: 'settings.manage' },
+      { label: 'Paramètres', path: '/settings', icon: SettingsOutlinedIcon, permission: 'settings.manage' },
+    ],
+  },
+]
+
 export const PLACEHOLDER_ROUTES = [
-  { path: 'prescriptions', title: 'Ordonnances' },
-  { path: 'billing', title: 'Factures' },
-  { path: 'payments', title: 'Paiements' },
   { path: 'expenses', title: 'Dépenses' },
   { path: 'stock', title: 'Stock' },
   { path: 'suppliers', title: 'Fournisseurs' },

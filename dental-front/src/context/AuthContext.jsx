@@ -102,6 +102,7 @@ export function AuthProvider({ children }) {
       logout,
       hasPermission: (permission) => permissions.includes(permission),
       hasRole: (role) => roles.includes(role),
+      isAdmin: roles.includes('ADMIN'),
     }),
     [token, user, clinic, roles, permissions, booting, login, logout]
   )

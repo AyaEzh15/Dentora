@@ -25,6 +25,8 @@ class User extends Authenticatable
         'phone',
         'password',
         'avatar_path',
+        'prescription_template_path',
+        'invoice_template_path',
         'is_active',
         'last_login_at',
     ];
@@ -52,5 +54,15 @@ class User extends Authenticatable
     public function appointments(): HasMany
     {
         return $this->hasMany(Appointment::class, 'dentist_id');
+    }
+
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class, 'dentist_id');
+    }
+
+    public function prescriptions(): HasMany
+    {
+        return $this->hasMany(Prescription::class, 'dentist_id');
     }
 }

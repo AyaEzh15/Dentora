@@ -28,7 +28,7 @@ function ToothButton({ number, condition, onSelect }) {
   )
 }
 
-export default function OdontogramChart({ teeth = [], selected, onSelect, onChangeCondition }) {
+export default function OdontogramChart({ teeth = [], selected, onSelect, onChangeCondition, readOnly = false }) {
   const map = Object.fromEntries(teeth.map((item) => [item.toothNumber, item]))
   const current = selected ? map[selected] : null
 
@@ -79,7 +79,8 @@ export default function OdontogramChart({ teeth = [], selected, onSelect, onChan
             select
             label="État"
             value={current?.condition || 'HEALTHY'}
-            onChange={(event) => onChangeCondition(selected, event.target.value, current?.notes || '')}
+            disabled={readOnly || !onChangeCondition}
+            onChange={(event) => onChangeCondition?.(selected, event.target.value, current?.notes || '')}
           >
             {TOOTH_CONDITIONS.map((item) => (
               <MenuItem key={item.value} value={item.value}>
@@ -90,7 +91,7 @@ export default function OdontogramChart({ teeth = [], selected, onSelect, onChan
         </Box>
       ) : (
         <Typography variant="body2" color="text.secondary">
-          Cliquez sur une dent pour modifier son état. {ALL_TEETH.length} dents permanentes.
+          Cliquez sur une dent pour {readOnly ? 'consulter' : 'modifier'} son état. {ALL_TEETH.length} dents permanentes.
         </Typography>
       )}
     </Box>
